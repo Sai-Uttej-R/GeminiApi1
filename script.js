@@ -1,6 +1,9 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const fs = require("fs");
 const dotenv = require('dotenv').config()
+const express = require('express');
+const app = express();
+const port = 3000;
 
 // Access your API key as an environment variable (see "Set up your API key" above)
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
@@ -29,7 +32,14 @@ async function run() {
   const result = await model.generateContent([prompt, ...imageParts]);
   const response = await result.response;
   const text = response.text();
-  console.log(text);
+  return text;
 }
 
-run();
+app.get('/runScript', async (req, res) => {
+    const text = await run(); // assuming your run function returns the text
+    res.send(text);
+});
+
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+});
