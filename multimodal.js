@@ -22,14 +22,17 @@ async function run() {
   const prompt = "Could you determine if there are any food items present in these images? If so, please provide the recipe in the following format: heading with the food name, followed by ingredients, steps, serving size, and additional details. If no food is detected in the image, indicate that no food has been found";
 
   const imageParts = [
-    fileToGenerativePart("cb1.jpg", "image/jpg"),
-    fileToGenerativePart("white.jpg", "image/jpg"),
+    fileToGenerativePart("images/cb1.jpg", "image/png"),
+    fileToGenerativePart("images/white.jpg", "image/jpg"),
   ];
 
   const result = await model.generateContent([prompt, ...imageParts]);
   const response = await result.response;
   const text = response.text();
   console.log(text);
+  const btn = document.getElementById("btn")
+  const res = document.getElementById("result")
+  res.innerHTML = text
 }
 
 run();

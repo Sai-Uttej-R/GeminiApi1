@@ -3,26 +3,10 @@
 <head>
     <title>Node.js Frontend</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./multimodal.js" ></script>
 </head>
 <body>
     <button id="runButton">Run Node.js Script</button>
     <div id="result"></div>
-
-    <script>
-        $(document).ready(function(){
-            $('#runButton').click(function(){
-                $.ajax({
-                    url: '/runScript',
-                    type: 'get',
-                    success: function(data) {
-                        $('#result').html(data);
-                    },
-                    error: function(err) {
-                        console.log(err);
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
